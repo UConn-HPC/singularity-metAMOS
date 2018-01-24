@@ -1,21 +1,17 @@
 # -*- mode: rpm-spec -*-
 
 Bootstrap: docker
-From: ubuntu:10.04
+From: ubuntu
 
 %labels
     Maintainer Pariksheet Nanda
 
 %post
     # Install OS packages.
-    # Download OS updates from old-releases.ubuntu.com instead of
-    # archive.ubuntu.com
-    sed -i "s#archive#old-releases#g" /etc/apt/sources.list
     apt-get -y update
-    dev="wget curl unzip gcc g++"
-    python="python-psutil cython python-matplotlib"
-    pysam="python-dev zlib1g-dev"
-    apt-get -y install $dev $python $pysam
+    dev="wget curl unzip gcc g++ make"
+    python="python-psutil python-pysam python-matplotlib cython python-setuptools"
+    apt-get -y install $dev $python
     # Download metAMOS if needed.
     prefix=/usr/bin
     version=1.5rc3
